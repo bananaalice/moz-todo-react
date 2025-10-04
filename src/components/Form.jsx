@@ -3,13 +3,16 @@ import { useState } from "react";
 function Form(props) {
   const [name, setName] = useState("");
 
-  function handleChange() {
-    console.log(event.target.value);
+  function handleChange(event) {
+    setName(event.target.value);
   }
 
   function handleSubmit(event) {
     event.preventDefault();
-    props.addTask("Say hello!");
+    if (name != "") {
+      props.addTask(name);
+      setName("");
+    }
   }
   return (
     <form onSubmit={handleSubmit}>
