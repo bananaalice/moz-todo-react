@@ -7,12 +7,30 @@ import Todo from "./components/Todo";
 function App(props) {
   const [tasks, setTasks] = useState(props.tasks);
 
+  function toggleTaskCompleted(id) {
+    const updatedTasks = tasks.map((task) => {
+      // このタスクが編集されたタスクと同じ ID を持っている場合
+      if (id === task.id) {
+        // オブジェクトを開いて、 `completed` プロップが
+        // 反転された新しいオブジェクトを作成します。
+        return { ...task, completed: !task.completed };
+      }
+      return task;
+    });
+    setTasks(updatedTasks);
+  }
+
+  function deleteTask(id) {
+    console.log(id);
+  }
+
   const taskList = tasks?.map((task) => (
     <Todo
       id={task.id}
       name={task.name}
       completed={task.completed}
       key={task.id}
+      toggleTaskCompleted={toggleTaskCompleted}
     />
   ));
 
